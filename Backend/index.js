@@ -17,11 +17,11 @@ async function main() {
 server.use(cors())
   .use(express.json())
   .use(morgan('combined'))
-  // .use(express.static(path.resolve(__dirname, process.env.PUBLIC_DIR)))
+  .use(express.static(path.resolve(__dirname, process.env.PUBLIC_DIR)))
   .use('/products', productRouter.router)
-  // .use('*', (_, res) => {
-  //   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  // })
+  .use('*', (_, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  })
   .listen(process.env.PORT, () => {
     console.log('Server Started on port', process.env.PORT || 2000);
   });
